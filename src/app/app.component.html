@@ -1,3 +1,45 @@
-<ul>
-  <li *ngFor="let user of users | async">{{ user.name }}</li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Welcome, Jaba</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Transaction ID</th>
+            <th scope="col">Date</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Transaction Type</th>
+            <th scope="col">Transaction Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let b of bpi | async">
+            <th scope="row">
+              {{ b.transaction_id }}
+            </th>
+            <th>
+              {{ b.date }}
+            </th>
+            <th>
+              {{ b.first_name }}
+            </th>
+            <th>
+              {{ b.last_name }}
+            </th>
+            <th>
+              {{ b.transaction_type }}
+            </th>
+            <th>
+              {{ b.transaction_value }}
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
