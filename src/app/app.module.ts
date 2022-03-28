@@ -11,6 +11,8 @@ import { HttpLink } from 'apollo-angular/http';
 import { ApolloLink, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 const uri = 'https://wired-ladybug-81.hasura.app/v1/graphql';
 
 export function createApollo(httpLink: HttpLink) {
@@ -45,6 +47,8 @@ export function createApollo(httpLink: HttpLink) {
     BrowserAnimationsModule,
     ApolloModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {

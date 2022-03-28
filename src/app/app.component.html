@@ -1,45 +1,174 @@
-<div class="container">
-  <div class="row">
+<div class="container custom-container">
+  <div class="row gy-5">
     <div class="col">
-      <h1>Welcome, Jaba</h1>
+      <h1>Welcome, {{ currentUser }}</h1>
+    </div>
+  </div>
+  <div class="row text-center align-items-center">
+    <div class="col">
+      <h3>Bank 1</h3>
+      <h4>Balance: ${{ currentBank1Balance }}</h4>
+      <form [formGroup]="bank1Form">
+        <div class="input-group deposit-input mx-auto">
+          <span class="input-group-text" id="inputGroupPrepend">$</span>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="transaction_value"
+            placeholder="Deposit Value"
+          />
+          <button
+            [disabled]="bank1Form.invalid"
+            (click)="onAddBank1Details()"
+            type="submit"
+            class="btn btn btn-outline-secondary"
+          >
+            DEPOSIT
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+      <h3>Bank 2</h3>
+      <h4>Balance: ${{ currentBank2Balance }}</h4>
+      <form [formGroup]="bank2Form">
+        <div class="input-group deposit-input mx-auto">
+          <span class="input-group-text" id="inputGroupPrepend">$</span>
+          <input
+            type="number"
+            class="form-control"
+            formControlName="transaction_value"
+            placeholder="Deposit Value"
+          />
+          <button
+            [disabled]="bank2Form.invalid"
+            (click)="onAddBank2Details()"
+            type="button"
+            class="btn btn btn-outline-secondary"
+          >
+            DEPOSIT
+          </button>
+        </div>
+      </form>
     </div>
   </div>
   <div class="row">
-    <div class="col">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Transaction ID</th>
-            <th scope="col">Date</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Transaction Type</th>
-            <th scope="col">Transaction Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let b of bpi | async">
-            <th scope="row">
-              {{ b.transaction_id }}
-            </th>
-            <th>
-              {{ b.date }}
-            </th>
-            <th>
-              {{ b.first_name }}
-            </th>
-            <th>
-              {{ b.last_name }}
-            </th>
-            <th>
-              {{ b.transaction_type }}
-            </th>
-            <th>
-              {{ b.transaction_value }}
-            </th>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col gy-5">
+      <h3>Transaction History</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col gy-2">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link active"
+            id="home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#home"
+            type="button"
+            role="tab"
+            aria-controls="home"
+            aria-selected="true"
+          >
+            Bank 1
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#profile"
+            type="button"
+            role="tab"
+            aria-controls="profile"
+            aria-selected="false"
+          >
+            Bank 2
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Transaction ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Transaction Type</th>
+                <th scope="col">Transaction Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let b of bank1 | async">
+                <td scope="row">
+                  {{ b.transaction_id }}
+                </td>
+                <td>
+                  {{ b.date }}
+                </td>
+                <td>
+                  {{ b.user.first_name }}
+                </td>
+                <td>
+                  {{ b.user.last_name }}
+                </td>
+                <td>
+                  {{ b.transaction_type }}
+                </td>
+                <td>${{ b.transaction_value }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="profile"
+          role="tabpanel"
+          aria-labelledby="profile-tab"
+        >
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Transaction ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Transaction Type</th>
+                <th scope="col">Transaction Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let b of bank2 | async">
+                <td scope="row">
+                  {{ b.transaction_id }}
+                </td>
+                <td>
+                  {{ b.date }}
+                </td>
+                <td>
+                  {{ b.user.first_name }}
+                </td>
+                <td>
+                  {{ b.user.last_name }}
+                </td>
+                <td>
+                  {{ b.transaction_type }}
+                </td>
+                <td>${{ b.transaction_value }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
